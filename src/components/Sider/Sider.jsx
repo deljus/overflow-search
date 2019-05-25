@@ -4,30 +4,15 @@ import PropTypes from 'prop-types';
 import './sider.css';
 
 class Sider extends Component{
-    constructor(props){
-        super(props)
-        this.state = { open: props.open };
-    }
-
-    static getDerivedStateFromState(nextProps, prevState){
-        if(nextProps.open !== prevState.open){
-            return{
-                open: nextProps.open
-            }
-        }
-    }
 
     handleClose = () => {
-        const { open } = this.state;
         const { onClose } = this.props;
-        this.setState({ open: !open });
         onClose();
     };
 
     render() {
 
-        const { render } = this.props;
-        const { open } = this.state;
+        const { render, open } = this.props;
 
         return (
             <div className={`side ${ open && 'open' }`}>

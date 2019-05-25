@@ -4,6 +4,7 @@ import SearchInput from './SearchInput';
 import Table from './Table';
 import Sider from './Sider';
 import Loader from './Loader';
+import Badge from './Badge';
 
 export {
     Layout,
@@ -11,5 +12,6 @@ export {
     SearchInput,
     Table,
     Sider,
-    Loader
+    Loader,
+    Badge
 }

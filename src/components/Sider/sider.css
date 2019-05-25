@@ -1,11 +1,11 @@
 .side-content {
-    width: 500px;
+    width: 50%;
     height: 100%;
     position: fixed;
     top: 0;
     bottom: 0;
     margin: 0;
-    right: -540px;
+    right: calc(-50% - 50px);
     padding: 20px 20px;
     transition: right 0.3s;
     z-index: 2000;

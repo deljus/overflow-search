@@ -7,6 +7,10 @@ export const routes = {
     notFound: { path: '*', name: 'Not Found', component: pages.NotFoundPage },
 };
 
-export const API = {
+const apiBaseUrl = 'http://api.stackexchange.com/2.2';
 
+export const api = {
+    search: `${apiBaseUrl}/search/advanced`
 };
+
+

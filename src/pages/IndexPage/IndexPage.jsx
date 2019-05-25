@@ -22,7 +22,7 @@ class IndexPage extends Component{
                 </p>
                 <SearchInput
                     onSearch={this.handleSearch}
-                    placeholder="Query..."
+                    placeholder="Your query..."
                     validators={[
                         {
                             error: 'Text is empty!', fn: (value) => !!value

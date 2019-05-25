@@ -1,0 +1,7 @@
+.badge{
+    padding: 5px;
+    margin: 2px;
+    color: white;
+    white-space: nowrap;
+    cursor: pointer;
+}

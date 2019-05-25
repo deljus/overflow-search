@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { get } from 'lodash';
 import PropTypes from 'prop-types';
 
 import './table.css';
@@ -11,9 +12,9 @@ function Table({ dataSource, columns }) {
         <th>{ title } { sortable && <i /> }</th>
     );
 
-    const renderTdBody = (dataSourceItem) => ({ key, render }) => (
-        <td>{ (render && render(dataSourceItem[key])) || dataSourceItem[key] }</td>
-    );
+    const renderTdBody = (dataSourceItem) => ({ dataIndex, render }) => (
+            <td>{ (render && render(get(dataSourceItem,dataIndex), dataSourceItem)) || get(dataSourceItem, dataIndex) }</td>
+        );
 
     const renderBody = ({ ...rest }) => (
         <tr>

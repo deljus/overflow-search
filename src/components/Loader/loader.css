@@ -36,6 +36,7 @@
     justify-content: center;
     align-items: center;
     z-index: 3000;
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 .loader.loading .spiner-wrapper{
