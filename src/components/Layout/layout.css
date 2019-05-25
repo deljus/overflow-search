@@ -1,0 +1,26 @@
+.main {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+header {
+    height: 50px;
+}
+
+main {
+    display: flex;
+    width: 100%;
+    flex: auto;
+    justify-content: center;
+}
+
+footer {
+    height: 50px;
+}
+
+
+.main-container{
+    max-width: 1200px;
+    width: 100%;
+}
