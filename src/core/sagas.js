@@ -1,4 +1,4 @@
-import { put, call, takeLatest } from 'redux-saga/effects';
+import { put, call, takeEvery } from 'redux-saga/effects';
 import { GET_DATA } from './constants';
 import { fetchStart, fetchEnd, fetchError, setData } from './actions';
 import { request } from 'helpers';
@@ -16,5 +16,5 @@ export function* startFetch({ id, url }) {
 }
 
 export function* sagas() {
-    yield takeLatest(GET_DATA, startFetch);
+    yield takeEvery(GET_DATA, startFetch);
 }

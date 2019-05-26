@@ -18,6 +18,12 @@ th {
     font-weight: normal;
     color: #999;
     text-transform: uppercase;
+    white-space: nowrap;
+}
+
+th i{
+    padding: 5px;
+    cursor: pointer;
 }
 
 .table-empty{

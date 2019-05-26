@@ -5,7 +5,10 @@
 }
 
 header {
-    height: 50px;
+    height: 70px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
 }
 
 main {
@@ -17,6 +20,10 @@ main {
 
 footer {
     height: 50px;
+}
+
+main .main-container{
+    padding: 50px 0;
 }
 
 

@@ -1,6 +1,5 @@
 import React, { createElement } from 'react';
 import { Switch, Route } from 'react-router'
-import { BrowserRouter } from 'react-router-dom';
 
 import { map } from 'lodash';
 
@@ -14,11 +13,9 @@ function RoutePages({ routes, ...rest }) {
     );
 
     return (
-        <BrowserRouter>
             <Switch>
                 { map(routes, renderRoute) }
             </Switch>
-        </BrowserRouter>
     );
 }
 

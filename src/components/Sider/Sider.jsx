@@ -5,6 +5,24 @@ import './sider.css';
 
 class Sider extends Component{
 
+
+    componentWillReceiveProps = (nextProps) => {
+        const { open } = this.props;
+        if(nextProps.open && !open){
+            document.body.style.overflow = 'hidden'
+        }
+        if(!nextProps.open && open){
+            document.body.style.overflow = 'auto'
+        }
+    };
+
+    componentWillUnmount = () => {
+        const { open } = this.props;
+        if(open){
+            document.body.style.overflow = 'auto'
+        }
+    };
+
     handleClose = () => {
         const { onClose } = this.props;
         onClose();

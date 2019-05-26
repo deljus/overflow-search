@@ -8,6 +8,7 @@ import Badge from './Badge';
 import Card from './Card';
 import Html from './Html';
 import Message from './Message';
+import NavBar from './NavBar';
 
 export {
     Layout,
@@ -19,5 +20,6 @@ export {
     Badge,
     Card,
     Html,
-    Message
+    Message,
+    NavBar
 }

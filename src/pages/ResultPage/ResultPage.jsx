@@ -62,17 +62,19 @@ class ResultPage extends Component{
             {
                 title: 'Author',
                 dataIndex: 'owner.display_name',
+                sortable: true
             },
             {
                 title: 'Title',
                 dataIndex: 'title',
-                key: 'age',
-                render: this.renderLinkToInfo
+                render: this.renderLinkToInfo,
+                sortable: true
             },
             {
                 title: 'Answers',
                 dataIndex: 'answer_count',
-                render: this.renderLinkToInfo
+                render: this.renderLinkToInfo,
+                sortable: true
             },
             {
                 title: 'Tags',
@@ -98,17 +100,20 @@ class ResultPage extends Component{
             {
                 title: 'Author',
                 dataIndex: 'owner.display_name',
-                render: this.renderAuthorName
+                render: this.renderAuthorName,
+                sortable: true
             },
             {
                 title: 'Title',
                 dataIndex: 'title',
-                render: this.renderLinkToInfo
+                render: this.renderLinkToInfo,
+                sortable: true
             },
             {
                 title: 'Answers',
                 dataIndex: 'answer_count',
-                render: this.renderLinkToInfo
+                render: this.renderLinkToInfo,
+                sortable: true,
             },
             {
                 title: 'Tags',
