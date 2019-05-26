@@ -1,5 +1,5 @@
 import React from 'react';
-import { get } from 'lodash';
+import { get, isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 
 import './table.css';
@@ -23,14 +23,17 @@ function Table({ dataSource, columns }) {
     );
 
     return(
-        <table className="table">
-            <tbody>
-                <tr>
-                    { map(columns, renderHeader) }
-                </tr>
-                { map(dataSource, renderBody) }
-            </tbody>
-        </table>
+        <div>
+            <table className="table">
+                <tbody>
+                    <tr>
+                        { map(columns, renderHeader) }
+                    </tr>
+                    { map(dataSource, renderBody) }
+                </tbody>
+            </table>
+            { isEmpty(dataSource) && (<div className="table-empty">Data is Empty</div>) }
+        </div>
     )
 }
 

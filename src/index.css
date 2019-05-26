@@ -43,3 +43,8 @@ input{
     background-repeat: no-repeat;
     padding: 12px 20px 12px 20px;
 }
+
+
+a:link, a:visited {
+    color: #1e87f0;
+}

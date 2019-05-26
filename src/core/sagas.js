@@ -9,7 +9,7 @@ export function* startFetch({ id, url }) {
         const response = yield call(request, url);
         yield put(setData(id, response));
     } catch (error) {
-        yield put(fetchError(id))
+        yield put(fetchError(id, error))
     } finally {
         yield put(fetchEnd(id));
     }

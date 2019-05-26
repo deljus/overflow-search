@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import * as CONST from './constants';
 
+import { get } from 'lodash';
+
 const defaultFetchData = {
     loading: false,
     error: ''
@@ -10,6 +12,7 @@ const fetch = (state = {}, action) => {
     switch (action.type) {
         case CONST.FETCH_START:
             return {
+                ...state,
                 [action.id]: {
                     ...defaultFetchData,
                     loading: true,
@@ -18,18 +21,26 @@ const fetch = (state = {}, action) => {
 
         case CONST.FETCH_END:
             return {
+                ...state,
                 [action.id]: {
-                    ...defaultFetchData,
+                    ...get(state, [action.id]),
+                    loading: false,
                 },
             };
 
         case CONST.FETCH_ERROR:
             return {
+                ...state,
                 [action.id]: {
-                    ...defaultFetchData,
+                    ...get(state, [action.id]),
                     error: action.error,
                 },
             };
+
+        case CONST.FETCH_CLEAN:
+            const newState = { ...state };
+            delete newState[action.id];
+            return newState;
 
         default:
             return state;
@@ -46,7 +57,7 @@ const data = (state = {}, action) => {
 
         case CONST.CLEAR_DATA:
             const newState = { ...state };
-            delete newState[action.key];
+            delete newState[action.id];
             return newState;
 
         case CONST.CLEAR_ALL_DATA:

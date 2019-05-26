@@ -5,6 +5,9 @@ import Table from './Table';
 import Sider from './Sider';
 import Loader from './Loader';
 import Badge from './Badge';
+import Card from './Card';
+import Html from './Html';
+import Message from './Message';
 
 export {
     Layout,
@@ -13,5 +16,8 @@ export {
     Table,
     Sider,
     Loader,
-    Badge
+    Badge,
+    Card,
+    Html,
+    Message
 }

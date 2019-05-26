@@ -1,13 +1,13 @@
-import RenderRoutes from './RenderRoutes';
+import RenderRoutes from '../containers/RenderRoutes/RenderRoutes';
 import withValidation from './withValidation';
-import prepareGetUrl from './prepareGetUrl';
+import prepareUrl from './prepareUrl';
 import getParamsToObj from './getParamsToObj';
 import request from './request';
 
 export {
     RenderRoutes,
     withValidation,
-    prepareGetUrl,
+    prepareUrl,
     getParamsToObj,
     request
 }

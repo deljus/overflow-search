@@ -27,10 +27,11 @@ async function oldXHR(url, params){
 async function fetchRequest(url, params){
     try{
         let response = await fetch(url, params);
-        if (response.ok) return await response.json();
-        throw new Error(response.status)
+        const ans = await response.json();
+        if (response.ok) return ans;
+        throw ans
     }catch (error) {
-        throw new Error(error.message)
+        throw error;
     }
 }
 

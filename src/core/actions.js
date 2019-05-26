@@ -16,6 +16,11 @@ export const fetchError = (id, error) => ({
     error
 });
 
+export const fetchClean = (id, error) => ({
+    type: CONST.FETCH_CLEAN,
+    id
+});
+
 export const getData = (id, url, params) => ({
     type: CONST.GET_DATA,
     id,

@@ -19,6 +19,12 @@ function SearchInput({ onSearch, onChange, error, ...rest }) {
       !error && onSearch(value);
     };
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            !error && onSearch(value);
+        }
+    };
+
     return(
         <div className="search-input">
             <div className="search-input-wrapper">
@@ -26,6 +32,7 @@ function SearchInput({ onSearch, onChange, error, ...rest }) {
                     type="text"
                     onChange={handleInputChange}
                     value={value}
+                    onKeyDown={handleKeyDown}
                     { ...rest }
                 />
                 <Button onClick={handleBtnClick} text="Search" disabled={error || !value}/>

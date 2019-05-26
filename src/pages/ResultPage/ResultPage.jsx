@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { get, map, eq } from 'lodash';
+import { get, map, flowRight } from 'lodash';
+import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 
 import { Table, Sider, Loader, Badge } from 'components';
 import { getData } from 'core/actions';
 import { api } from 'config';
-import { getParamsToObj, prepareGetUrl } from 'helpers';
-
-const SIDER_TYPE = {
-    TAGS: 'TAGS',
-    AUTHORS: 'AUTHORS'
-};
+import { getParamsToObj, prepareUrl } from 'helpers';
+import {routes} from "../../config";
 
 class ResultPage extends Component{
     state = {
@@ -22,14 +19,15 @@ class ResultPage extends Component{
     componentDidMount = () => {
         const { initPage, location } = this.props;
         const { search } = getParamsToObj(location.search);
-        initPage(prepareGetUrl(api.search, { title: search, site: 'stackoverflow' }));
+        initPage(prepareUrl(api.search, null, { title: search, site: 'stackoverflow' }));
 
     };
 
+    // Main table
     handlerBadgeClick = (tagged) => () => {
-        const { getTags } = this.props;
-        getTags(prepareGetUrl(api.search, { tagged, site: 'stackoverflow' }));
-        this.setState({ open: true, type: SIDER_TYPE.TAGS });
+        const { getSiderData } = this.props;
+        getSiderData(prepareUrl(api.search, null, { tagged, site: 'stackoverflow' }));
+        this.setState({ open: true });
     };
 
     handleCloseSide = () => {
@@ -38,22 +36,63 @@ class ResultPage extends Component{
 
     handleLinkClick = ({ owner }) => (e) => {
         e.preventDefault();
-        const { getAuthors } = this.props;
-        getAuthors(prepareGetUrl(api.search, { user: owner.user_id, site: 'stackoverflow' }));
-        this.setState({ open: true, type: SIDER_TYPE.AUTHORS });
+        const { getSiderData } = this.props;
+        getSiderData(prepareUrl(api.search, null, { user: owner.user_id, site: 'stackoverflow' }));
+        this.setState({ open: true });
     };
 
-    renderTags = (value, key) => (
-        <Badge text={value} color="primary" onClick={this.handlerBadgeClick(value)} />
+    renderTags = (value) => (
+        <Badge text={value} color="primary" onClick={this.handlerBadgeClick(value)} clickable/>
     );
 
     renderAuthorName = (value, obj) => (
         <a href="#" onClick={this.handleLinkClick(obj)}>{ value }</a>
     );
 
+    renderTagsForSiderTable = (value) => (
+        <Badge text={value} color="primary" />
+    );
+
+    renderLinkToInfo = (value, obj) => (
+        <Link to={prepareUrl(routes.info.path, obj)}>{ value }</Link>
+    );
+
+    renderSider = () => {
+        const columns = [
+            {
+                title: 'Author',
+                dataIndex: 'owner.display_name',
+            },
+            {
+                title: 'Title',
+                dataIndex: 'title',
+                key: 'age',
+                render: this.renderLinkToInfo
+            },
+            {
+                title: 'Answers',
+                dataIndex: 'answer_count',
+                render: this.renderLinkToInfo
+            },
+            {
+                title: 'Tags',
+                dataIndex: 'tags',
+                render: (values) => map(values, this.renderTagsForSiderTable)
+            },
+        ];
+
+        const { siderContentStatus, siderDataSource } = this.props;
+
+        return(
+        <Loader loading={siderContentStatus.loading}>
+            <Table dataSource={siderDataSource} columns={columns} />
+        </Loader>
+        )
+    };
+
     render(){
-        const { name, dataSource, searchListStatus, tagListDataSource, tagListStatus, authorListDataSource } = this.props;
-        const { open, type } = this.state;
+        const { name, dataSource, searchListStatus } = this.props;
+        const { open } = this.state;
 
         const columns = [
             {
@@ -64,11 +103,12 @@ class ResultPage extends Component{
             {
                 title: 'Title',
                 dataIndex: 'title',
-                key: 'age',
+                render: this.renderLinkToInfo
             },
             {
                 title: 'Answers',
-                dataIndex: 'answer_count'
+                dataIndex: 'answer_count',
+                render: this.renderLinkToInfo
             },
             {
                 title: 'Tags',
@@ -81,12 +121,14 @@ class ResultPage extends Component{
             <>
                 <h2>{ name }</h2>
                 <Loader loading={searchListStatus.loading}>
-                    <Table dataSource={dataSource} columns={columns} />
+                    <Table
+                        dataSource={dataSource}
+                        columns={columns} />
                 </Loader>
                 <Sider
                     onClose={this.handleCloseSide}
                     open={open}
-                    render={() => (<Loader loading={tagListStatus.loading}><Table dataSource={eq(type, SIDER_TYPE.TAGS) ? tagListDataSource: authorListDataSource } columns={columns} /></Loader>)}
+                    render={this.renderSider}
                 />
             </>
         )
@@ -104,16 +146,13 @@ ResultPage.defaultProps = {
 const mapStateToProps = state => ({
     dataSource: get(state, 'data.searchList.items', []),
     searchListStatus: get(state, 'fetch.searchList', {}),
-    tagListStatus: get(state, 'fetch.tags', {}),
-    tagListDataSource: get(state, 'data.tags.items', []),
-    authorListStatus: get(state, 'fetch.tags', {}),
-    authorListDataSource: get(state, 'data.tags.items', []),
+    siderContentStatus: get(state, 'fetch.sider', {}),
+    siderDataSource: get(state, 'data.sider.items', []),
 });
 
 const mapDispatchToProps = dispatch => ({
     initPage: (url) => dispatch(getData('searchList', url)),
-    getTags: (url) => dispatch(getData('tags', url)),
-    getAuthors: (url) => dispatch(getData('authors', url)),
+    getSiderData: (url) => dispatch(getData('sider', url)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ResultPage);

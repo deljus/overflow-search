@@ -4,13 +4,13 @@ import { withRouter } from "react-router-dom";
 
 import { SearchInput } from 'components'
 import { routes } from 'config';
-import { prepareGetUrl } from 'helpers';
+import { prepareUrl } from 'helpers';
 
 class IndexPage extends Component{
 
     handleSearch = (search) => {
         const { history } = this.props;
-        history.push(prepareGetUrl(routes.results.path, { search }));
+        history.push(prepareUrl(routes.results.path, null, { search }));
     };
 
     render(){

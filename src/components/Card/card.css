@@ -1,0 +1,27 @@
+.card{
+    background: white;
+    margin-bottom: 10px;
+}
+
+.card .card-header{
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.card .card-body{
+    padding: 20px;
+    overflow: auto;
+}
+
+.card .avatar{
+    width: 50px;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.card .title{
+    padding: 20px;
+}
