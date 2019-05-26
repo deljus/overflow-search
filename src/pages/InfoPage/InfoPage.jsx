@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { get, map } from "lodash";
+import { get, map, isEmpty } from "lodash";
 import { connect } from "react-redux";
 
 import { getData } from 'core/actions';
@@ -31,7 +31,7 @@ class InfoPage extends Component{
             <Loader loading={loading}>
                 <h2>Question:</h2>
                 { map(questionsDataSource, this.renderCards) }
-                <h2>Answers of question:</h2>
+                <h2>{ !isEmpty(answersDataSource) ? 'Answers of question:' : 'No answers'}</h2>
                 { map(answersDataSource, this.renderCards) }
             </Loader>
         )
