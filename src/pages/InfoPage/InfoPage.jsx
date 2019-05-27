@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { get, map, isEmpty } from "lodash";
 import { connect } from "react-redux";
 
@@ -37,14 +36,6 @@ class InfoPage extends Component{
         )
     }
 }
-
-InfoPage.propTypes = {
-
-};
-
-InfoPage.defaultProps = {
-
-};
 
 const mapStateToProps = state => ({
     answersDataSource: get(state, 'data.answers.items', []),

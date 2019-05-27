@@ -79,11 +79,10 @@ function Table({ dataSource, columns }) {
         </tr>
     );
 
-    console.log(sorting);
-
     const sortKey = keys(sorting)[0];
-    console.log(sortKey);
-    const newDataSource = !isEmpty(sorting) && has(sorting, [sortKey, 'fn']) ? dataSource.sort(sorting[sortKey].fn(sortKey)) : dataSource;
+    const newDataSource = !isEmpty(sorting) && has(sorting, [sortKey, 'fn'])
+        ? dataSource.sort(sorting[sortKey].fn(sortKey))
+        : dataSource;
 
     return(
         <div>

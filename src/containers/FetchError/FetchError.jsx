@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { map, get, isEmpty, compact } from 'lodash';
 import { connect } from 'react-redux';
 

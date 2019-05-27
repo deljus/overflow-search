@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { get, map, flowRight } from 'lodash';
 import { Link } from "react-router-dom";
-import PropTypes from 'prop-types';
 
 import { Table, Sider, Loader, Badge } from 'components';
 import { getData } from 'core/actions';
@@ -139,14 +138,6 @@ class ResultPage extends Component{
         )
     }
 }
-
-ResultPage.propTypes = {
-
-};
-
-ResultPage.defaultProps = {
-
-};
 
 const mapStateToProps = state => ({
     dataSource: get(state, 'data.searchList.items', []),

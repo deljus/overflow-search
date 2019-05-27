@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { withRouter } from "react-router-dom";
 
 import { SearchInput } from 'components'
@@ -33,13 +32,5 @@ class IndexPage extends Component{
         )
     }
 }
-
-IndexPage.propTypes = {
-    history: PropTypes.object,
-};
-
-IndexPage.defaultProps = {
-    name: '',
-};
 
 export default withRouter(IndexPage);

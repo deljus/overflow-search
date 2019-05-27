@@ -21,7 +21,7 @@ function SearchInput({ onSearch, onChange, error, ...rest }) {
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
-            !error && onSearch(value);
+            !error && value && onSearch(value);
         }
     };
 
