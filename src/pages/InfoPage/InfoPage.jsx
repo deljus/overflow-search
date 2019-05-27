@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { get, map, isEmpty } from "lodash";
+import { get, map, isEmpty, uniqueId } from "lodash";
 import { connect } from "react-redux";
 
 import { getData } from 'core/actions';
@@ -16,7 +16,7 @@ class InfoPage extends Component{
     };
 
     renderCards = ({ owner, body }) => (
-        <Card avatar={owner.profile_image} title={owner.display_name}>
+        <Card key={uniqueId('card_')} avatar={owner.profile_image} title={owner.display_name}>
            <Html>
                 {body}
            </Html>

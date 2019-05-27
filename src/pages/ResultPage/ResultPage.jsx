@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { get, map, flowRight } from 'lodash';
+import { get, map, uniqueId } from 'lodash';
 import { Link } from "react-router-dom";
 
 import { Table, Sider, Loader, Badge } from 'components';
@@ -41,7 +41,7 @@ class ResultPage extends Component{
     };
 
     renderTags = (value) => (
-        <Badge text={value} color="primary" onClick={this.handlerBadgeClick(value)} clickable/>
+        <Badge key={uniqueId('table_badge_')} text={value} color="primary" onClick={this.handlerBadgeClick(value)}/>
     );
 
     renderAuthorName = (value, obj) => (

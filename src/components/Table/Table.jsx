@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { get, isEmpty, map, has, findIndex, keys } from 'lodash';
+import { get, isEmpty, map, has, findIndex, keys, uniqueId } from 'lodash';
 import PropTypes from 'prop-types';
 
 import './table.css';
@@ -62,19 +62,27 @@ function Table({ dataSource, columns }) {
     };
 
     const constRenaderSortIcon = (dataIndex) => (
-        <i className={get(sorting, [dataIndex, 'icon'], 'fa fa-sort')} aria-hidden="true" onClick={handleSortClick(dataIndex)}/>
+        <i key={uniqueId('table_sort_')}
+           className={get(sorting, [dataIndex, 'icon'], 'fa fa-sort')}
+           aria-hidden="true"
+           onClick={handleSortClick(dataIndex)}
+        />
     );
 
     const renderHeader = ({ title, sortable, dataIndex }) => (
-        <th>{ title }{ sortable && constRenaderSortIcon(dataIndex) }</th>
+        <th key={uniqueId('table_th_')}>
+            { title }{ sortable && constRenaderSortIcon(dataIndex) }
+        </th>
     );
 
     const renderTdBody = (dataSourceItem) => ({ dataIndex, render }) => (
-            <td>{ (render && render(get(dataSourceItem,dataIndex), dataSourceItem)) || get(dataSourceItem, dataIndex) }</td>
+            <td key={uniqueId('table_td_')}>
+                { (render && render(get(dataSourceItem,dataIndex), dataSourceItem)) || get(dataSourceItem, dataIndex) }
+            </td>
         );
 
     const renderBody = ({ ...rest }) => (
-        <tr>
+        <tr key={uniqueId('table_tr_')} >
             { map(columns, renderTdBody(rest)) }
         </tr>
     );

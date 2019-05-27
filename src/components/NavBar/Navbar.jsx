@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { map } from 'lodash';
+import { map, uniqueId } from 'lodash';
 import PropTypes from 'prop-types';
 
 import './navbar.css';
@@ -8,13 +8,13 @@ import './navbar.css';
 function Navbar({ items }){
 
     const renderNavs = ({ name, path }) => (
-        <li><Link to={path}>{name}</Link></li>
+        <li key={uniqueId('nav_')}><Link to={path}>{name}</Link></li>
     );
 
     return(
-        <ui className="navbar">
+        <ul className="navbar">
             { map(items, renderNavs) }
-        </ui>
+        </ul>
     )
 }
 
